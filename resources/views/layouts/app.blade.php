@@ -12,7 +12,7 @@
     <body>
         <a href="/">Home</a>
         <a href="/about">About</a>
-        <a href="/articles">Articles</a>
+        <a href="{{ route('articles.index') }}">Articles</a>
         <div class="container mt-4">
             <h1>@yield('header')</h1>
             <div>
