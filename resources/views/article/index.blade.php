@@ -17,6 +17,7 @@
         </h2>
         <div>{{Str::limit($article->body, 200)}}</div>
         <a href="{{ route('articles.edit', $article) }}">Редактировать</a>
+        <a href="{{ route('articles.destroy', $article) }}"  data-confirm="Вы уверены?" data-method="delete" rel="nofollow">Удалить</a>
         <br><br>
     @endforeach
 @endsection
