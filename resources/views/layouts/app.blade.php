@@ -15,6 +15,11 @@
         <a href="{{ route('articles.index') }}">Articles</a>
         <div class="container mt-4">
             <h1>@yield('header')</h1>
+
+            @if (Session::has('status'))
+                {{ Session::get('status') }}
+            @endif
+
             <div>
                 @yield('content')
             </div>

@@ -2,9 +2,6 @@
 
 @section('content')
     <h1>Список статей</h1>
-    @if (Session::has('status'))
-        {{ Session::get('status') }}
-    @endif
 
     <a href="{{ route('articles.create') }}">Создать статью</a>
 

@@ -13,7 +13,7 @@ class StoreArticle extends FormRequest
      */
     public function rules()
     {
-        $articleId = $this->route()->id;
+        $articleId = $this->route()->article->id;
 
         $rules = [
             'name' => 'required|unique:articles,name,' . $articleId,

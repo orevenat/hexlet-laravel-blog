@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Article;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreArticle;
 
 class ArticleController extends Controller
@@ -13,33 +13,6 @@ class ArticleController extends Controller
         $articles = Article::paginate();
 
         return view('article.index', compact('articles'));
-    }
-
-    public function show($id)
-    {
-        $article = Article::findOrFail($id);
-        return view('article.show', compact('article'));
-    }
-
-    public function edit($id)
-    {
-        $article = Article::findOrFail($id);
-        return view('article.edit', compact('article'));
-    }
-
-    public function update(StoreArticle $request, $id)
-    {
-        $article = Article::findOrFail($id);
-
-        $validated = $request->validated();
-
-        $article->fill($validated);
-        $article->save();
-
-        $request->session()->flash('status', 'Article updated successfully!');
-
-        return redirect()
-            ->route('articles.index');
     }
 
     public function create()
@@ -62,9 +35,31 @@ class ArticleController extends Controller
             ->route('articles.index');
     }
 
-    public function destroy($id)
+    public function show(Article $article)
     {
-        $article = Article::find($id);
+        return view('article.show', compact('article'));
+    }
+
+    public function edit(Article $article)
+    {
+        return view('article.edit', compact('article'));
+    }
+
+    public function update(StoreArticle $request, Article $article)
+    {
+        $validated = $request->validated();
+
+        $article->fill($validated);
+        $article->save();
+
+        $request->session()->flash('status', 'Article updated successfully!');
+
+        return redirect()
+            ->route('articles.show', $article);
+    }
+
+    public function destroy(Request $request, Article $article)
+    {
         if ($article) {
             $article->delete();
         }
